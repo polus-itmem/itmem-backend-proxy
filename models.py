@@ -70,6 +70,7 @@ class CarTypes(BaseModel):
 class TaskCredit(BaseModel):
     date: date
     car_type: str
+    place: str
 
 
 class TaskAccept(BaseModel):
@@ -80,13 +81,6 @@ class Task(BaseModel):
     id: int
 
     date: date
-    car_accept: bool
+    allow: bool
+    place: str
     car: Optional[Car]
-
-
-class Tasks(BaseModel):
-    tasks: List[Task]
-
-
-class Time(BaseModel):
-    time: float

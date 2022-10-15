@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     user_microservice_url: str
     user_microservice_token: SecretStr
 
+    tasks_microservice_url: str
+    tasks_microservice_token: SecretStr
+
     class Config:
         env_file = Path(__file__).parent.joinpath('.env')
         env_file_encoding = 'utf-8'
