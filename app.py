@@ -114,7 +114,7 @@ async def get_cars():
 
 
 @app.get("/api/cars/get_my_car", description = "Authorized: Driver", response_model = List[models.Car])
-async def driver_car(request: Request, response: Response):
+async def driver_my_car(request: Request, response: Response):
     user_id = get_user_id([models.Role.driver], request, response)
     cars = proxy.cars('/cars/get_driver_car', {'id': user_id}).json()
     try:
@@ -125,7 +125,7 @@ async def driver_car(request: Request, response: Response):
 
 
 @app.get("/api/driver/get_info", description = "Authorized: Driver", response_model = List[models.Task])
-async def driver_info(request: Request, response: Response):
+async def driver_my_info(request: Request, response: Response):
     user_id = get_user_id([models.Role.driver], request, response)
     cars = proxy.cars('/cars/get_driver_car', {'id': user_id}).json()
     tasks = proxy.tasks('/tasks/car', [{'id': i['id']} for i in cars]).json()
@@ -133,7 +133,7 @@ async def driver_info(request: Request, response: Response):
 
 
 @app.post("/api/dispatcher/change_status", description = "Authorized: Dispatcher", response_model = models.Task)
-async def driver_info(request: Request, response: Response, task_credits: models.DispatcherAllowCredits):
+async def dispatcher_moderate(request: Request, response: Response, task_credits: models.DispatcherAllowCredits):
     user_id = get_user_id([models.Role.dispatcher], request, response)
     tasks = proxy.tasks('/tasks/change',
                         {'dispatcher_id': user_id, 'task_id': task_credits.task_id, 'status': task_credits.status.to_int()}).json()
