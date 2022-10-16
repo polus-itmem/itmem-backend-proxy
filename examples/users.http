@@ -1,0 +1,33 @@
+### Auth
+POST http://localhost:8000/api/users/auth
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "ietmem",
+  "password": "12345678"
+}
+
+### Create task
+POST http://localhost:8000/api/users/create_task
+Content-Type: application/json
+
+{
+  "date": "2019-08-24",
+  "car_type": "Автовышка (28 м)",
+  "place": "Санкт петербург"
+}
+
+### My task
+GET http://localhost:8000/api/users/task
+Content-Type: application/json
+
+
+### All task
+GET http://localhost:8000/api/tasks/all
+Content-Type: application/json
+
+
+### Cars types
+GET http://localhost:8000/api/cars/types
+Content-Type: application/json

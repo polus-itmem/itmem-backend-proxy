@@ -14,7 +14,7 @@ def get_user_id(roles: List[Role], request: Request, response: Response) -> int:
     role = cookies.get('role')
     user_id = cookies.get('user_id')
     user_auth = cookies.get('user_auth')
-
+    # print(role, user_id, user_auth)
     if not (role or user_id or user_auth):
         if Role.un_auth in roles:
             return -1

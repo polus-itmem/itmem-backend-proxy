@@ -3,15 +3,21 @@ import httpx
 from config import config
 
 
-def user_microservice(url: str, data: dict, _type: str = 'post'):
+def users(url: str, data: dict, _type: str = 'post'):
     url = config.user_microservice_url + url
     token = config.user_microservice_token.get_secret_value()
     return microservice(_type, url, data, token)
 
 
-def tasks_microservice(url: str, data: dict, _type: str = 'post'):
+def tasks(url: str, data: dict, _type: str = 'post'):
     url = config.tasks_microservice_url + url
     token = config.tasks_microservice_token.get_secret_value()
+    return microservice(_type, url, data, token)
+
+
+def cars(url: str, data: dict, _type: str = 'post'):
+    url = config.cars_microservice_url + url
+    token = config.cars_microservice_token.get_secret_value()
     return microservice(_type, url, data, token)
 
 

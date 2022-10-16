@@ -1,6 +1,6 @@
 from datetime import date
 from enum import Enum
-from typing import Optional, List
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -11,6 +11,10 @@ from pydantic import BaseModel
 class DateRange(BaseModel):
     start: date
     end: date
+
+
+class ModelId(BaseModel):
+    id: int
 
 
 class Role(Enum):
@@ -40,31 +44,21 @@ class User(BaseModel):
     role: Role
     first_name: str
     second_name: str
-
-
-class Driver(BaseModel):
-    id: int
-
-    first_name: str
-    second_name: str
-
-
-class Car(BaseModel):
-    id: int
-
-    park: str
-    description: str
-    name: str
     number: str
-    driver: Optional[Driver]
 
 
 class CarType(BaseModel):
     description: str
 
 
-class CarTypes(BaseModel):
-    types: List[CarType]
+class Car(BaseModel):
+    id: int
+
+    park: str
+    type: CarType
+    name: str
+    number: str
+    driver: Optional[User]
 
 
 class TaskCredit(BaseModel):
@@ -77,10 +71,35 @@ class TaskAccept(BaseModel):
     id: int
 
 
+class TaskStatus(Enum):
+    """-1 - finished, 0 - wait, 1 - process"""
+    finished = -1
+    wait = 0
+    process = 1
+
+    def to_int(self):
+        return {
+            TaskStatus.finished: -1,
+            TaskStatus.wait: 0,
+            TaskStatus.process: 1
+        }[self]
+
+
+class TaskModerate(BaseModel):
+    dispatcher: User
+    status: TaskStatus
+
+
 class Task(BaseModel):
     id: int
 
     date: date
-    allow: bool
+    moderate: Optional[TaskModerate]
     place: str
     car: Optional[Car]
+
+
+class DispatcherAllowCredits(BaseModel):
+    task_id: int
+    status: TaskStatus
+

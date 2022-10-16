@@ -1,0 +1,19 @@
+### Auth
+POST http://localhost:8000/api/users/auth
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "trtrtr",
+  "password": "qwer1234"
+}
+
+
+### My Cars
+GET http://localhost:8000/api/dispatcher/change_status
+Content-Type: application/json
+
+
+### My tasks
+GET http://localhost:8000/api/driver/get_info
+Content-Type: application/json

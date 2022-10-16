@@ -1,0 +1,18 @@
+### Auth
+POST http://localhost:8000/api/users/auth
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "ietmtm2",
+  "password": "09876789"
+}
+
+### Change status
+POST http://localhost:8000/api/dispatcher/change_status
+Content-Type: application/json
+
+{
+  "task_id": 4,
+  "status": 1
+}
